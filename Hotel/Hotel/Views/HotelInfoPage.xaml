@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Hotel.Views.HotelInfoPage"
+             xmlns:viewModels="clr-namespace:Hotel.ViewModels"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:HotelInfoViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="BackgroundColor" Value="#80b3ff"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="HeightRequest" Value="42"/>
+                <Setter Property="BorderRadius" Value="5"/>
+                <Setter Property="BorderWidth" Value="0" />
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#0066ff">
+        <Label Text="Kontakt"
+               FontSize="Large"
+               TextColor="White"
+               BackgroundColor="#0066ff"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               HeightRequest="40"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start" />
+        <StackLayout Padding="10" Spacing="10">
+            <Grid BackgroundColor="#b3d1ff" RowSpacing="1" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding Address}"
+                       BackgroundColor="#80b3ff"
+                       FontSize="Medium"
+                       TextColor="White"
+                       Grid.Row="0"
+                       Grid.Column="1" 
+                       HeightRequest="40"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       />
+                <Label Text="{Binding Postcode}"
+                       BackgroundColor="#80b3ff"
+                       FontSize="Medium"
+                       TextColor="White"
+                       Grid.Row="1"
+                       Grid.Column="1" 
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                <Label Text="{Binding Phone}"
+                       BackgroundColor="#80b3ff"
+                       FontSize="Medium"
+                       TextColor="White"
+                       Grid.Row="2"
+                       Grid.Column="1" 
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+            </Grid>
+        </StackLayout>
+        <StackLayout Padding="10" Spacing="10">
+            <Button Command="{Binding Call, Mode=TwoWay}"
+                    Text="Zadzwoń do obsługi klienta"
+                    Style="{StaticResource ButtonStyle}" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

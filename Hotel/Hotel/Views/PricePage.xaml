@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Hotel.Views.PricePage"
+             xmlns:viewModels="clr-namespace:Hotel.ViewModels"
+             xmlns:behaviors="clr-namespace:Hotel.Validators"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:PriceViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#0066ff">
+        <Label Text="Koszt"
+               FontSize="Large"
+               TextColor="White"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               HeightRequest="40"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start" />
+        <StackLayout VerticalOptions="StartAndExpand">
+            <Grid BackgroundColor="#80b3ff">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="  Liczba łóżek:"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       TextColor="White"
+                       FontSize="Medium"/>
+                <Entry Text="{Binding AmountOfBeds}"
+                       Placeholder="np. 2"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       TextColor="White"
+                       FontSize="Medium">
+                    <Entry.Behaviors>
+                        <behaviors:AmountOfBedsValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="  Od:"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       TextColor="White"
+                       FontSize="Medium"/>
+                <DatePicker Date="{Binding StartDate}"
+                            Format="dd/MM/yyyy"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            TextColor="White"/>
+                <Label Text="  Do:"
+                       Grid.Row="4"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       TextColor="White"
+                       FontSize="Medium"/>
+                <DatePicker Date="{Binding EndDate}"
+                            Format="dd/MM/yyyy"
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            TextColor="White"/>
+                <Label Text="  Typ:"
+                       Grid.Row="5"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       TextColor="White"
+                       FontSize="Medium"/>
+                <Picker x:Name="  Pakiet"
+                        SelectedItem="{Binding Type}"
+                        Title="Wybierz pakiet"
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        TextColor="White"
+                       >
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>GOLD</x:String>
+                            <x:String>SILVER</x:String>
+                            <x:String>BRONZE</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Label Text="  Prawdopodobny koszt pobytu:"
+                       Grid.Row="6"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       TextColor="White"
+                       FontSize="Medium"/>
+                <Label Text="{Binding PriceString}"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Grid.Row="6"
+                       Grid.Column="1"
+                       TextColor="White"
+                       FontSize="Medium"/>
+            </Grid>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

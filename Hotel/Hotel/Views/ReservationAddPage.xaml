@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Hotel.Views.ReservationAddPage"
+             xmlns:viewModels="clr-namespace:Hotel.ViewModels"
+             xmlns:behaviors="clr-namespace:Hotel.Validators"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:ReservationAddViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="BackgroundColor" Value="#80b3ff"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="HeightRequest" Value="42"/>
+                <Setter Property="BorderRadius" Value="5"/>
+                <Setter Property="BorderWidth" Value="0" />
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#0066ff">
+        <Label Text="Rezerwacja"
+               FontSize="Large"
+               TextColor="White"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               HeightRequest="40"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start"
+               BackgroundColor="#80b3ff"/>
+        <StackLayout VerticalOptions="StartAndExpand">
+            <Grid BackgroundColor="#80b3ff" RowSpacing="1" Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Imię:"
+                       TextColor="White"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"                    
+                       />
+                <Entry Text="{Binding FirstName}"
+                       Placeholder="np. Jan"
+                       TextColor="White"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       >
+                    <Entry.Behaviors>
+                        <behaviors:NameValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="Nazwisko:"
+                       TextColor="White"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" 
+                       />
+                <Entry Text="{Binding LastName}"
+                       TextColor="White"
+                       Placeholder="np. Kowalski"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       >
+                    <Entry.Behaviors>
+                        <behaviors:NameValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="Liczba łóżek:"
+                       TextColor="White"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" 
+                       />
+                <Entry Text="{Binding AmountOfBeds}"
+                       TextColor="White"
+                       Placeholder="np. 2"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       >
+                    <Entry.Behaviors>
+                        <behaviors:AmountOfBedsValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="Od:"
+                       TextColor="White"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" 
+                       />
+                <DatePicker Date="{Binding StartDate}"
+                            TextColor="White"
+                            Format="dd/MM/yyyy"
+                            Grid.Row="3"
+                            Grid.Column="1" 
+                            />
+                <Label Text="Do:"
+                       TextColor="White"
+                       Grid.Row="4"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" 
+                       />
+                <DatePicker Date="{Binding EndDate}"
+                            TextColor="White"
+                            Format="dd/MM/yyyy"
+                            Grid.Row="4"
+                            Grid.Column="1" 
+                            />
+                <Label Text="Typ:"
+                       TextColor="White"
+                       Grid.Row="5"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" 
+                       />
+                <Picker x:Name="Pakiet"
+                        TextColor="White"
+                        SelectedItem="{Binding Type}"
+                        Title="Wybierz pakiet"
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        >
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>GOLD</x:String>
+                            <x:String>SILVER</x:String>
+                            <x:String>BRONZE</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Grid>
+        </StackLayout>
+        <StackLayout Padding="10" Spacing="10">
+            <Button Command="{Binding SaveReservation, Mode=TwoWay}"
+                    Text="Rezerwuj"
+                    Style="{StaticResource ButtonStyle}" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

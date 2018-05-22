@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Hotel"
+             x:Class="Hotel.Views.AttractionListPage"
+             xmlns:viewModels="clr-namespace:Hotel.ViewModels"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:AttractionListViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="BackgroundColor" Value="#0066ff"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="HeightRequest" Value="42"/>
+                <Setter Property="BorderRadius" Value="5"/>
+                <Setter Property="BorderWidth" Value="0" />
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#cce5ff">
+        <Grid BackgroundColor="#0066ff">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Label Text="Super Hotel"
+                   FontSize="Large"
+                   TextColor="White"
+                   BackgroundColor="#0066ff"
+                   Grid.Row="1"
+                   Grid.Column="2"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Center"/>
+        </Grid>
+        <StackLayout Padding="2" VerticalOptions="StartAndExpand">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ListView x:Name="AttractionsList"
+                          ItemsSource="{Binding AttractionsList, Mode=TwoWay}"
+                          IsPullToRefreshEnabled="True"
+                          IsRefreshing="{Binding IsRefreshing}"
+                          Grid.Row="0"
+                          HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand"
+                          SeparatorVisibility="None"
+                          HasUnevenRows="True"
+                          >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell >
+                                <Grid VerticalOptions="CenterAndExpand" Padding = "10, 0" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row = "0" Grid.Column ="0" HorizontalOptions = "StartAndExpand" Text = "{Binding Name}" TextColor = "Black" />
+                                    <Label Grid.Row = "1" Grid.Column ="0" XAlign = "Start" Text = "{Binding Description}" VerticalOptions = "Center" />
+                                    <Label Grid.Row = "0" Grid.Column ="1" XAlign = "End" Text = "{Binding StartTime, StringFormat='{}{0:HH\\:mm}'}" TextColor = "#3333ff" />
+                                    <Label Grid.Row = "1" Grid.Column ="1" XAlign = "End" Text = "{Binding EndTime, StringFormat='{}{0:HH\\:mm}'}" TextColor = "#0033cc" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
+        <StackLayout Padding="10" Spacing="10">
+            <Button Command="{Binding Reservation, Mode=TwoWay}"
+                    IsVisible="{Binding IsReservationsListEmpty}"
+                    Text="Rezerwacja" 
+                    Style="{StaticResource ButtonStyle}" />
+            <Button Command="{Binding ReservationDet, Mode=TwoWay}"
+                    IsVisible="{Binding MIRRIsReservationsListEmpty}"
+                    Text="Rezerwacja" Style="{StaticResource ButtonStyle}"/>
+            <Button Command="{Binding HotelInfo, Mode=TwoWay}"
+                    Text="Kontakt" Style="{StaticResource ButtonStyle}"/>
+            <Button Command="{Binding Price, Mode=TwoWay}"
+                    Text="Koszt" Style="{StaticResource ButtonStyle}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

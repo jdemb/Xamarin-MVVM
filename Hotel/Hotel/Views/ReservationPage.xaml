@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Hotel.Views.ReservationPage"
+             xmlns:viewModels="clr-namespace:Hotel.ViewModels"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:ReservationDetailsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="BackgroundColor" Value="#80b3ff"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="HeightRequest" Value="42"/>
+                <Setter Property="BorderRadius" Value="5"/>
+                <Setter Property="BorderWidth" Value="0" />
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#0066ff">
+        <Label Text="Rezerwacja"
+               FontSize="Large"
+               TextColor="White"
+               BackgroundColor="#80b3ff"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               HeightRequest="40"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start" />
+        <StackLayout Padding="10" VerticalOptions="StartAndExpand">
+            <Grid BackgroundColor="White" RowSpacing="1" ColumnSpacing="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text=" Rezerwujący: "
+                       HeightRequest="40"
+                       TextColor="White"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" 
+                       BackgroundColor="#80b3ff"
+                       FontSize="Medium"/>
+                <Label Text="{Binding LastName, StringFormat='  {0}'}"
+                       TextColor="White"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       BackgroundColor="#80b3ff"
+                       FontSize="Medium"/>
+                <Label Text=" Liczba łóżek: "
+                       TextColor="White"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       FontSize="Medium"
+                       BackgroundColor="#80b3ff"/>
+                <Label Text="{Binding AmountOfBeds, StringFormat='  {0}'}"
+                       TextColor="White"
+                       Grid.Row="1"
+                       Grid.Column="1" 
+                       FontSize="Medium"
+                       BackgroundColor="#80b3ff"/>
+                <Label Text=" Od: "
+                       TextColor="White"
+                       Grid.Row="2"
+                       Grid.Column="0" 
+                       FontSize="Medium"
+                       BackgroundColor="#80b3ff"/>
+                <Label Text="{Binding StartDate, StringFormat='{0:  MMMM dd, yyyy}'}"
+                       TextColor="White"
+                       Grid.Row="2"
+                       Grid.Column="1" 
+                       FontSize="Medium"
+                       BackgroundColor="#80b3ff"/>
+                <Label Text=" Do: "
+                       TextColor="White"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       FontSize="Medium"
+                       BackgroundColor="#80b3ff"/>
+                <Label Text="{Binding EndDate, StringFormat='{0:  MMMM dd, yyyy}'}"
+                       TextColor="White"
+                       Grid.Row="3"
+                       Grid.Column="1" 
+                       FontSize="Medium"
+                       BackgroundColor="#80b3ff"/>
+                <Label Text=" Pakiet: "
+                       TextColor="White"
+                       Grid.Row="4"
+                       Grid.Column="0"
+                       FontSize="Medium"
+                       BackgroundColor="#80b3ff"/>
+                <Label Text="{Binding Type, StringFormat='  {0}'}"
+                       TextColor="White"
+                       Grid.Row="4"
+                       Grid.Column="1" 
+                       FontSize="Medium"
+                       BackgroundColor="#80b3ff"/>
+            </Grid>
+        </StackLayout>
+        <StackLayout Padding="10" Spacing="10">
+            <Button Command="{Binding EditReservation, Mode=TwoWay}"
+                    Text="Edytuj rezerwację"
+                    Style="{StaticResource ButtonStyle}"  />
+            <Button Command="{Binding DeleteReservation, Mode=TwoWay}"
+                    Text="Usuń rezerwację"
+                    Style="{StaticResource ButtonStyle}"  />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

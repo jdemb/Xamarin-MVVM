@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PatientsStory"
+             x:Class="PatientsStory.Views.PatientsListPage"
+             xmlns:viewModels="clr-namespace:PatientsStory.ViewModels"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:PatientsListViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout HorizontalOptions="FillAndExpand">
+        <Grid BackgroundColor="Black">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Image Source="refresh.png"
+                   BackgroundColor="Black"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RefreshCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Historia pacjentów"
+                   FontSize="Large"
+                   TextColor="White"
+                   BackgroundColor="Black"
+                   Grid.Row="1"
+                   Grid.Column="2"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Center"/>
+        </Grid>
+        <StackLayout Padding="2"
+                     VerticalOptions="StartAndExpand">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ListView x:Name="PatientsList"
+                          ItemsSource="{Binding PatientsList, Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedPatient, Mode=TwoWay}"
+                          IsPullToRefreshEnabled="True"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsRefreshing}"
+                          Grid.Row="0"
+                          HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand"
+                          SeparatorColor="Black"
+                          SeparatorVisibility="Default">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding FullName}"
+                                      Detail="{Binding PESEL}"
+                                      TextColor="Black" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
+        <StackLayout VerticalOptions="End">
+            <Button Command="{Binding AddPatient, Mode=TwoWay}"
+                    Text="Dodaj pacjenta"
+                    TextColor="White"
+                    BackgroundColor="Green" />
+        </StackLayout>
+        <StackLayout VerticalOptions="End">
+            <Button Command="{Binding Reservation, Mode=TwoWay}"
+                    IsVisible="{Binding IsReservationsListEmpty}"
+                    Text="Rezerwacja"
+                    TextColor="White"
+                    BackgroundColor="Green" />
+        </StackLayout>
+        <StackLayout VerticalOptions="End">
+            <Button Command="{Binding ReservationDet, Mode=TwoWay}"
+                    IsVisible="{Binding MIRRIsReservationsListEmpty}"
+                    Text="Rezerwacja"
+                    TextColor="White"
+                    BackgroundColor="Green" />
+        </StackLayout>
+        <StackLayout VerticalOptions="End">
+            <Button Command="{Binding HotelInfo, Mode=TwoWay}"
+                    Text="Kontakt"
+                    TextColor="White"
+                    BackgroundColor="Green" />
+        </StackLayout>
+        <StackLayout VerticalOptions="End">
+            <Button Command="{Binding Price, Mode=TwoWay}"
+                    Text="Koszt"
+                    TextColor="White"
+                    BackgroundColor="Green" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

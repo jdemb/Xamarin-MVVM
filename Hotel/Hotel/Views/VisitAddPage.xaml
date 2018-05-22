@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PatientsStory.Views.VisitAddPage"
+             xmlns:viewModels="clr-namespace:PatientsStory.ViewModels"
+             xmlns:behaviors="clr-namespace:PatientsStory.Validators"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:VisitAddViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand">
+        <Label Text="Historia pacjentów"
+               FontSize="Large"
+               TextColor="White"
+               BackgroundColor="Black"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               HeightRequest="40"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start" />
+        <Label Text="{Binding PatientFullName}"
+               FontSize="Medium"
+               TextColor="Black"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="Start" />
+        <StackLayout Padding="10"
+                     VerticalOptions="StartAndExpand">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Data wizyty:"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <DatePicker Date="{Binding DateOfVisit}"
+                            MaximumDate="{Binding MaximumDateOfVisit}"
+                            Format="yyyy-MM-dd"
+                            Grid.Row="0"
+                            Grid.Column="1" />
+                <Label Text="Diagnoza:"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Entry Text="{Binding Diagnose}"
+                       Placeholder="np. Grypa"
+                       Grid.Row="1"
+                       Grid.Column="1">
+                    <Entry.Behaviors>
+                        <behaviors:DescriptionValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="Zalecenia:"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Entry Text="{Binding Indications}"
+                       Placeholder="np. Brak"
+                       Grid.Row="2"
+                       Grid.Column="1">
+                    <Entry.Behaviors>
+                        <behaviors:DescriptionValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="Cena:"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Entry Text="{Binding Price}"
+                       Placeholder="np. 100"
+                       Grid.Row="3"
+                       Grid.Column="1">
+                    <Entry.Behaviors>
+                        <behaviors:PriceValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+            </Grid>
+        </StackLayout>
+        <StackLayout VerticalOptions="End">
+            <Button Command="{Binding SaveVisit, Mode=TwoWay}"
+                    Text="Zapisz wizytę"
+                    TextColor="White"
+                    BackgroundColor="Green"
+                    HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

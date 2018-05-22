@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PatientsStory.Views.VisitDetailsPage"
+             xmlns:viewModels="clr-namespace:PatientsStory.ViewModels"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:VisitDetailsViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout HorizontalOptions="FillAndExpand">
+        <Label Text="Historia pacjentów"
+               FontSize="Large"
+               TextColor="White"
+               BackgroundColor="Black"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               HeightRequest="40"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start" />
+        <Label Text="{Binding PatientFullName}"
+               FontSize="Medium"
+               TextColor="Black"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="Start" />
+        <Label Text="Wizyta lekarska"
+               FontSize="Medium"
+               TextColor="Black"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="Start" />
+        <StackLayout Padding="10"
+                     VerticalOptions="StartAndExpand">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Data wizyty:"
+                       FontSize="Micro"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Label Text="{Binding DateOfVisit, StringFormat='{0:yyyy-MM-dd}'}"
+                       TextColor="Black"
+                       Grid.Row="0"
+                       Grid.Column="1" />
+                <Label Text="Diagnoza:"
+                       FontSize="Micro"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Label Text="{Binding Diagnose}"
+                       TextColor="Black"
+                       Grid.Row="1"
+                       Grid.Column="1" />
+                <Label Text="Zalecenia:"
+                       FontSize="Micro"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Label Text="{Binding Indications}"
+                       TextColor="Black"
+                       Grid.Row="2"
+                       Grid.Column="1" />
+                <Label Text="Opłata:"
+                       FontSize="Micro"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Label Text="{Binding Price, StringFormat='{0:0.00} zł'}"
+                       TextColor="Black"
+                       Grid.Row="3"
+                       Grid.Column="1" />
+            </Grid>
+        </StackLayout>
+        <StackLayout VerticalOptions="End">
+            <Button Command="{Binding EditVisit, Mode=TwoWay}"
+                    Text="Edytuj wizytę"
+                    FontSize="Default"
+                    TextColor="White"
+                    BackgroundColor="Green" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

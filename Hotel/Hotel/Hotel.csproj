@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Helpers\CountAgeHelper.cs" />
+    <Compile Remove="Models\Patient.cs" />
+    <Compile Remove="Models\Visit.cs" />
+    <Compile Remove="Validators\ValidationBehaviors\GenderValidationBehavior.cs" />
+    <Compile Remove="Validators\ValidationBehaviors\PESELValidationBehavior.cs" />
+    <Compile Remove="ViewModels\PatientAddViewModel.cs" />
+    <Compile Remove="ViewModels\PatientDetailsViewModel.cs" />
+    <Compile Remove="ViewModels\PatientsListViewModel.cs" />
+    <Compile Remove="ViewModels\VisitAddViewModel.cs" />
+    <Compile Remove="ViewModels\VisitDetailsViewModel.cs" />
+    <Compile Remove="ViewModels\VisitsListViewModel.cs" />
+    <Compile Remove="Views\AttractionListPage.cs" />
+    <Compile Remove="Views\PatientAddPage.xaml.cs" />
+    <Compile Remove="Views\PatientDetailsPage.xaml.cs" />
+    <Compile Remove="Views\PatientsListPage.xaml.cs" />
+    <Compile Remove="Views\VisitAddPage.xaml.cs" />
+    <Compile Remove="Views\VisitDetailsPage.xaml.cs" />
+    <Compile Remove="Views\VisitsListPage.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\PatientAddPage.xaml" />
+    <EmbeddedResource Remove="Views\PatientDetailsPage.xaml" />
+    <EmbeddedResource Remove="Views\PatientsListPage.xaml" />
+    <EmbeddedResource Remove="Views\VisitAddPage.xaml" />
+    <EmbeddedResource Remove="Views\VisitDetailsPage.xaml" />
+    <EmbeddedResource Remove="Views\VisitsListPage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SQLiteNetExtensions" Version="2.0.0" />
+    <PackageReference Include="SQLiteNetExtensions.Async" Version="2.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
+      <DependentUpon>*.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\AttractionListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\HotelInfoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PricePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ReservationAddPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ReservationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

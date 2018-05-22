@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PatientsStory.Views.PatientAddPage"
+             xmlns:viewModels="clr-namespace:PatientsStory.ViewModels"
+             xmlns:behaviors="clr-namespace:PatientsStory.Validators"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:PatientAddViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand">
+        <Label Text="Historia pacjentów"
+               FontSize="Large"
+               TextColor="White"
+               BackgroundColor="Black"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               HeightRequest="40"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start" />
+        <StackLayout Padding="10"
+                     VerticalOptions="StartAndExpand">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Imię:"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Entry Text="{Binding FirstName}"
+                       Placeholder="np. Adam"
+                       Grid.Row="0"
+                       Grid.Column="1">
+                    <Entry.Behaviors>
+                        <behaviors:NameValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="Nazwisko:"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Entry Text="{Binding LastName}"
+                       Placeholder="np. Adamczyk"
+                       Grid.Row="1"
+                       Grid.Column="1">
+                    <Entry.Behaviors>
+                        <behaviors:NameValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="PESEL:"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Entry Text="{Binding PESEL}"
+                       Placeholder="np. 90010112345"
+                       Grid.Row="2"
+                       Grid.Column="1">
+                    <Entry.Behaviors>
+                        <behaviors:PESELValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="Płeć (M/K):"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+                <Entry Text="{Binding Gender}"
+                       Placeholder="np. M"
+                       Grid.Row="3"
+                       Grid.Column="1">
+                    <Entry.Behaviors>
+                        <behaviors:GenderValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+            </Grid>
+        </StackLayout>
+        <StackLayout VerticalOptions="End">
+            <Button Command="{Binding SavePatient, Mode=TwoWay}"
+                    Text="Zapisz pacjenta"
+                    TextColor="White"
+                    BackgroundColor="Green"
+                    HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

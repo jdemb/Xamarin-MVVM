@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PatientsStory.Views.VisitsListPage"
+             xmlns:viewModels="clr-namespace:PatientsStory.ViewModels"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:VisitsListViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout HorizontalOptions="FillAndExpand">
+        <Label Text="Historia pacjentów"
+               FontSize="Large"
+               TextColor="White"
+               BackgroundColor="Black"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               HeightRequest="40"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start" />
+        <StackLayout Padding="2"
+                     VerticalOptions="StartAndExpand">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ListView x:Name="VisitsListView"
+                            ItemsSource="{Binding VisitsList, Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedVisit, Mode=TwoWay}"
+                            Grid.Row="0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            SeparatorVisibility="Default"
+                            SeparatorColor="Black">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Diagnose}"
+                                      Detail="{Binding DateOfVisit, StringFormat='{0:yyyy-MM-dd}'}"
+                                      TextColor="Black"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
+        <StackLayout VerticalOptions="End">
+            <Button Command="{Binding AddVisit, Mode=TwoWay}"
+                    Text="Dodaj wizytę"
+                    TextColor="White"
+                    BackgroundColor="Green" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
